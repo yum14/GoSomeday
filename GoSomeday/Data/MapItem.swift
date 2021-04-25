@@ -15,13 +15,17 @@ class MapItem: Object, Identifiable {
     @objc dynamic var phoneNumber: String?
     @objc dynamic var url: String?
     @objc dynamic var placemark: Placemark?
+    @objc dynamic var order: Int = 0
     
     override init() {}
     
-    convenience init(id: String = UUID().uuidString, name: String? = nil, phoneNumber: String? = nil, url: String? = nil, placemark: Placemark? = nil) {
+    convenience init(id: String? = nil, name: String? = nil, phoneNumber: String? = nil, url: String? = nil, placemark: Placemark? = nil) {
         self.init()
         
-        self.id = id
+        if let id = id {
+            self.id = id
+        }
+        
         self.name = name
         self.phoneNumber = phoneNumber
         self.url = url

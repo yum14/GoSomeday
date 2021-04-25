@@ -50,10 +50,13 @@ struct MapView: UIViewRepresentable {
             uiView.setRegion(coordinateRegion, animated: self.animated)
             self.moveCoordinateRegion.toggle()
         }
-        
         // 削除のために一度全て削除してから追加する
         uiView.removeAnnotations(uiView.annotations)
-        uiView.addAnnotations(annotations)
+        uiView.addAnnotations(annotations.map {
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = CLLocationCoordinate2D(latitude: $0.coordinate?.latitude ?? 0, longitude: $0.coordinate?.longitude ?? 0)
+            return annotation
+        })
     }
     
     class Coordinator : NSObject, MKMapViewDelegate, CLLocationManagerDelegate {

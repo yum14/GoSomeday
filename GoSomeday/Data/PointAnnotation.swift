@@ -6,16 +6,29 @@
 //
 
 import Foundation
-import MapKit
+import RealmSwift
 
-class PointAnnotation: MKPointAnnotation, Identifiable {
-    var id: String
+class PointAnnotation: Object, Identifiable {
+    @objc dynamic var id: String = UUID().uuidString
+    @objc dynamic var title: String?
+    @objc dynamic var subtitle: String?
+    @objc dynamic var coordinate: LocationCoordinate?
     
-    init(id: String, title: String? = nil, subtitle: String? = nil, coordinate: CLLocationCoordinate2D) {
-        self.id = id
-        super.init()
-        super.title = title
-        super.subtitle = subtitle
-        super.coordinate = coordinate
+    override init() {}
+    
+    convenience init(id: String? = nil, title: String? = nil, subtitle: String? = nil, coordinate: LocationCoordinate) {
+        self.init()
+        
+        if let id = id {
+            self.id = id
+        }
+
+        self.title = title
+        self.subtitle = subtitle
+        self.coordinate = coordinate
+    }
+    
+    override static func primaryKey() -> String? {
+        return "id"
     }
 }

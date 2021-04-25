@@ -14,10 +14,6 @@ class HomeViewModel: ObservableObject {
     @Published var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 35.710263046992736, longitude: 139.81067894034084),
         span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
-//    @Published var region: MKCoordinateRegion
-//    @Published var region = MKCoordinateRegion(
-//        center: CLLocationCoordinate2D(latitude: 35.6804, longitude: 139.7690),
-//        span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
     
     @Published var searchText = "" {
         didSet {
@@ -34,7 +30,9 @@ class HomeViewModel: ObservableObject {
     @Published var searching = false
     @Published var resignFirstResponder = false
     
-    let searchModel = LocalSearchModel()
+    private let searchModel = LocalSearchModel()
+    private let searchHistoryStore = SearchHistoryStore.shared
+    private let MaxHistory = 3
     
     func Search() {
         if self.searchText.isEmpty {
@@ -85,10 +83,10 @@ class HomeViewModel: ObservableObject {
         let annotation = PointAnnotation(id: UUID().uuidString,
                                          title: nil,
                                          subtitle: placemark?.address,
-                                         coordinate: coordinate)
+                                         coordinate: LocationCoordinate(latitude: coordinate.latitude, longitude: coordinate.longitude))
         
         self.annotations.append(annotation)
-        
+
         // annotationの場所をセンターにする
         self.region = MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude),
@@ -109,21 +107,21 @@ class HomeViewModel: ObservableObject {
     
     
     func onSearchResultTap(item: MapItem) -> Void {
-        
-        print(item.name!)
-        
         guard let coordinate = item.placemark?.coordinate else {
             return
         }
+        self.searchText = item.name ?? ""
         
         self.region = MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude),
             span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
         
+        // 検索履歴の追加と削除
+        self.addSearchHistory(item)
+        
         self.moveCoordinateRegion = true
 //        self.searchText = ""
         self.searching = false
-        
         self.resignFirstResponder = true
     }
     
@@ -131,23 +129,49 @@ class HomeViewModel: ObservableObject {
         guard let coordinate = item.placemark?.coordinate else {
             return
         }
+        self.searchText = item.name ?? ""
         
         self.region = MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude),
             span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
+        
+        // 検索履歴の追加と削除
+        self.addSearchHistory(item)
+        
         self.moveCoordinateRegion = true
         self.searching = false
     }
     
-    func move() -> Void {
-        self.region = MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: 35.710263046992736, longitude: 139.81067894034084),
-            span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
-        
-        self.moveCoordinateRegion = true
-    }
-    
     func onLocationButtonTap() {
         self.moveCurrentLocation = true
+    }
+    
+    private func addSearchHistory(_ item: MapItem) {
+        guard let placemark = item.placemark, let coordinate = placemark.coordinate else {
+            return
+        }
+        
+        // 保存する最大値を超える履歴を削除する
+        if self.searchHistoryStore.mapItems.count >= self.MaxHistory {
+            var counter = 1
+            for item in self.searchHistoryStore.mapItems.sorted(by: { $0.order > $1.order }) {
+                if counter >= self.MaxHistory {
+                    self.searchHistoryStore.delete(id: item.id)
+                }
+                
+                counter += 1
+            }
+        }
+        
+        // 検索履歴を追加
+        searchHistoryStore.add(MapItem(name: item.name,
+                                       phoneNumber: item.phoneNumber,
+                                       url: item.url,
+                                       placemark: Placemark(coordinate: coordinate,
+                                                            countryCode: placemark.countryCode,
+                                                            administrativeArea: placemark.administrativeArea,
+                                                            locality: placemark.locality,
+                                                            thoroughfare: placemark.thoroughfare,
+                                                            subThoroughfare: placemark.subThoroughfare)))
     }
 }

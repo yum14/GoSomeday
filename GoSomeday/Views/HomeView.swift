@@ -12,9 +12,9 @@ import PartialSheet
 struct HomeView: View {
     @ObservedObject var viewModel = HomeViewModel()
     @EnvironmentObject var partialSheetManager: PartialSheetManager
-    //    @State private var searching = false
     
     @State var alert = false
+    @ObservedObject private var searchHistoryStore = SearchHistoryStore.shared
     
     
     var body: some View {
@@ -99,7 +99,8 @@ struct HomeView: View {
                     if self.viewModel.searching {
                         if self.viewModel.searchText.isEmpty {
                             withAnimation {
-                                SearchHistoryList(items: [])
+                                SearchHistoryList(items: self.searchHistoryStore.mapItems.sorted(by: { $0.order > $1.order }),
+                                                  onTap: { _ in })
                                     .listStyle(PlainListStyle())
                             }
                         } else {

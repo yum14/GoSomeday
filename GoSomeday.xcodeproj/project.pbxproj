@@ -9,7 +9,10 @@
 /* Begin PBXBuildFile section */
 		28F3198727FF0A63924FAF71 /* Pods_GoSomedayTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7343B36F01771962D9D0EC75 /* Pods_GoSomedayTests.framework */; };
 		521CDFFBF9D48F442C76D53B /* Pods_GoSomeday_GoSomedayUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0F655C4A39F7003046A11D /* Pods_GoSomeday_GoSomedayUITests.framework */; };
-		7506940D26287ED500FFC67A /* MapItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7506940C26287ED500FFC67A /* MapItems.swift */; };
+		7506940D26287ED500FFC67A /* SearchHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7506940C26287ED500FFC67A /* SearchHistory.swift */; };
+		751B632F26353CC200EC5062 /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751B632E26353CC200EC5062 /* RealmHelper.swift */; };
+		751B63372635436900EC5062 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751B63362635436900EC5062 /* Bookmark.swift */; };
+		751B6342263543CB00EC5062 /* BookmarkStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751B6341263543CB00EC5062 /* BookmarkStore.swift */; };
 		753D883F262464E50010926C /* GoSomedayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753D883E262464E50010926C /* GoSomedayApp.swift */; };
 		753D8841262464E50010926C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753D8840262464E50010926C /* ContentView.swift */; };
 		753D8843262464E60010926C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 753D8842262464E60010926C /* Assets.xcassets */; };
@@ -25,6 +28,7 @@
 		75728013262B2F4000EF8935 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75728012262B2F4000EF8935 /* HomeViewModel.swift */; };
 		757E5DFC2630492000814938 /* PointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757E5DFB2630492000814938 /* PointAnnotation.swift */; };
 		75BD6F812629DA0E00B53A4B /* SearchResultList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BD6F802629DA0E00B53A4B /* SearchResultList.swift */; };
+		75C7E01E26353A3D00FAE00D /* SearchHistoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C7E01D26353A3D00FAE00D /* SearchHistoryStore.swift */; };
 		75F4521426285CC400620983 /* SearchHistoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F4521326285CC400620983 /* SearchHistoryList.swift */; };
 		75F4521A26285D7D00620983 /* MapItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F4521926285D7D00620983 /* MapItem.swift */; };
 		C05F1207E56EC48CF6A42D22 /* Pods_GoSomeday.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A34BE5526AB0DFFBB34E8720 /* Pods_GoSomeday.framework */; };
@@ -51,7 +55,11 @@
 		3C8F52D2FF10C6871548EAAA /* Pods-GoSomeday.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoSomeday.release.xcconfig"; path = "Target Support Files/Pods-GoSomeday/Pods-GoSomeday.release.xcconfig"; sourceTree = "<group>"; };
 		44FAA0A548507B32267FF5A6 /* Pods-GoSomeday.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoSomeday.debug.xcconfig"; path = "Target Support Files/Pods-GoSomeday/Pods-GoSomeday.debug.xcconfig"; sourceTree = "<group>"; };
 		7343B36F01771962D9D0EC75 /* Pods_GoSomedayTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoSomedayTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7506940C26287ED500FFC67A /* MapItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapItems.swift; sourceTree = "<group>"; };
+		7506940C26287ED500FFC67A /* SearchHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistory.swift; sourceTree = "<group>"; };
+		751B632A26353C8200EC5062 /* GoSomeday.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GoSomeday.entitlements; sourceTree = "<group>"; };
+		751B632E26353CC200EC5062 /* RealmHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
+		751B63362635436900EC5062 /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
+		751B6341263543CB00EC5062 /* BookmarkStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkStore.swift; sourceTree = "<group>"; };
 		753D883B262464E50010926C /* GoSomeday.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoSomeday.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		753D883E262464E50010926C /* GoSomedayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoSomedayApp.swift; sourceTree = "<group>"; };
 		753D8840262464E50010926C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -72,6 +80,7 @@
 		75728012262B2F4000EF8935 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		757E5DFB2630492000814938 /* PointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointAnnotation.swift; sourceTree = "<group>"; };
 		75BD6F802629DA0E00B53A4B /* SearchResultList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultList.swift; sourceTree = "<group>"; };
+		75C7E01D26353A3D00FAE00D /* SearchHistoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryStore.swift; sourceTree = "<group>"; };
 		75F4521326285CC400620983 /* SearchHistoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryList.swift; sourceTree = "<group>"; };
 		75F4521926285D7D00620983 /* MapItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapItem.swift; sourceTree = "<group>"; };
 		87A718F2FAD0DAB2976C0328 /* Pods-GoSomedayTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoSomedayTests.debug.xcconfig"; path = "Target Support Files/Pods-GoSomedayTests/Pods-GoSomedayTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -149,6 +158,7 @@
 		753D883D262464E50010926C /* GoSomeday */ = {
 			isa = PBXGroup;
 			children = (
+				751B632A26353C8200EC5062 /* GoSomeday.entitlements */,
 				75F4521826285D6900620983 /* Data */,
 				755920A92625D0D10031E219 /* Models */,
 				75728011262B2F2D00EF8935 /* ViewModels */,
@@ -221,8 +231,12 @@
 			isa = PBXGroup;
 			children = (
 				75F4521926285D7D00620983 /* MapItem.swift */,
-				7506940C26287ED500FFC67A /* MapItems.swift */,
+				7506940C26287ED500FFC67A /* SearchHistory.swift */,
 				757E5DFB2630492000814938 /* PointAnnotation.swift */,
+				75C7E01D26353A3D00FAE00D /* SearchHistoryStore.swift */,
+				751B632E26353CC200EC5062 /* RealmHelper.swift */,
+				751B63362635436900EC5062 /* Bookmark.swift */,
+				751B6341263543CB00EC5062 /* BookmarkStore.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -481,18 +495,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				75BD6F812629DA0E00B53A4B /* SearchResultList.swift in Sources */,
+				751B632F26353CC200EC5062 /* RealmHelper.swift in Sources */,
 				755920AB2625D1480031E219 /* LocalSearchModel.swift in Sources */,
 				75F4521A26285D7D00620983 /* MapItem.swift in Sources */,
 				753D8871262465FE0010926C /* HomeView.swift in Sources */,
 				753D8887262498570010926C /* NewPointView.swift in Sources */,
 				753D8882262478680010926C /* MapView.swift in Sources */,
+				751B6342263543CB00EC5062 /* BookmarkStore.swift in Sources */,
+				75C7E01E26353A3D00FAE00D /* SearchHistoryStore.swift in Sources */,
 				757E5DFC2630492000814938 /* PointAnnotation.swift in Sources */,
-				7506940D26287ED500FFC67A /* MapItems.swift in Sources */,
+				7506940D26287ED500FFC67A /* SearchHistory.swift in Sources */,
 				75728013262B2F4000EF8935 /* HomeViewModel.swift in Sources */,
 				753D8841262464E50010926C /* ContentView.swift in Sources */,
 				753D883F262464E50010926C /* GoSomedayApp.swift in Sources */,
 				75F4521426285CC400620983 /* SearchHistoryList.swift in Sources */,
 				753D88922625B66F0010926C /* SearchBar.swift in Sources */,
+				751B63372635436900EC5062 /* Bookmark.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -650,6 +668,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GoSomeday/GoSomeday.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"GoSomeday/Preview Content\"";
 				DEVELOPMENT_TEAM = TB8F2PW523;
@@ -674,6 +693,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GoSomeday/GoSomeday.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"GoSomeday/Preview Content\"";
 				DEVELOPMENT_TEAM = TB8F2PW523;

@@ -14,7 +14,7 @@ struct SearchHistoryList: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Text("履歴")
+                Text("検索履歴")
                     .font(.subheadline)
                     .fontWeight(.bold)
                     .padding(.horizontal)
