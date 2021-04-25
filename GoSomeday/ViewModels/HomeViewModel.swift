@@ -120,8 +120,9 @@ class HomeViewModel: ObservableObject {
         self.addSearchHistory(item)
         
         self.moveCoordinateRegion = true
-//        self.searchText = ""
         self.searching = false
+        
+        // SearchBarからフォーカスを外す
         self.resignFirstResponder = true
     }
     
@@ -145,6 +146,24 @@ class HomeViewModel: ObservableObject {
     func onLocationButtonTap() {
         self.moveCurrentLocation = true
     }
+    
+    func onSearchHistoryListTap(item: MapItem) {
+        guard let coordinate = item.placemark?.coordinate else {
+            return
+        }
+        self.searchText = item.name ?? ""
+        
+        self.region = MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude),
+            span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
+        
+        self.moveCoordinateRegion = true
+        self.searching = false
+        
+        // SearchBarからフォーカスを外す
+        self.resignFirstResponder = true
+    }
+    
     
     private func addSearchHistory(_ item: MapItem) {
         guard let placemark = item.placemark, let coordinate = placemark.coordinate else {

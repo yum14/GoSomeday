@@ -99,8 +99,9 @@ struct HomeView: View {
                     if self.viewModel.searching {
                         if self.viewModel.searchText.isEmpty {
                             withAnimation {
-                                SearchHistoryList(items: self.searchHistoryStore.mapItems.sorted(by: { $0.order > $1.order }),
-                                                  onTap: { _ in })
+                                SearchHistoryList(
+                                    items: self.searchHistoryStore.mapItems.sorted(by: { $0.order > $1.order }),
+                                    onTap: self.viewModel.onSearchHistoryListTap)
                                     .listStyle(PlainListStyle())
                             }
                         } else {
