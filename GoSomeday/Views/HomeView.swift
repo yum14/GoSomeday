@@ -92,7 +92,8 @@ struct HomeView: View {
                                     self.viewModel.searching = true
                                 }
                               },
-                              resignFirstResponder: self.$viewModel.resignFirstResponder
+                              resignFirstResponder: self.$viewModel.resignFirstResponder,
+                              showsCancelButton: self.$viewModel.showsCancelButton
                     )
                     .padding(.vertical, -10)
                     

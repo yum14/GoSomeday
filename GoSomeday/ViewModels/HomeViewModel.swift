@@ -29,6 +29,7 @@ class HomeViewModel: ObservableObject {
     
     @Published var searching = false
     @Published var resignFirstResponder = false
+    @Published var showsCancelButton = false
     
     private let searchModel = LocalSearchModel()
     private let searchHistoryStore = SearchHistoryStore.shared
@@ -162,6 +163,7 @@ class HomeViewModel: ObservableObject {
         
         // SearchBarからフォーカスを外す
         self.resignFirstResponder = true
+        self.showsCancelButton = false
     }
     
     

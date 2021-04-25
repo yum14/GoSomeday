@@ -19,6 +19,7 @@ struct SearchBar: UIViewRepresentable {
 //    var onTextChanged: (String?) -> Void = { _ in }
     
     @Binding var resignFirstResponder: Bool
+    @Binding var showsCancelButton: Bool
     
     func makeUIView(context: UIViewRepresentableContext<SearchBar>) -> UISearchBar {
         let searchBar = UISearchBar(frame: .zero)
@@ -27,6 +28,7 @@ struct SearchBar: UIViewRepresentable {
         searchBar.searchBarStyle = .minimal
         searchBar.autocapitalizationType = .none
         searchBar.showsCancelButton = false
+        self.showsCancelButton = false
         return searchBar
     }
     
@@ -38,15 +40,16 @@ struct SearchBar: UIViewRepresentable {
             self.resignFirstResponder.toggle()
         }
         
+        uiView.showsCancelButton = self.showsCancelButton
     }
     
     func makeCoordinator() -> SearchBar.Coordinator {
-        Coordinator(text: $text,
-                    onCommit: self.onCommit,
-                    onCancel: self.onCancel,
-                    onBeginEditing: self.onBeginEditing
-//                    ,onTextChanged: self.onTextChanged
-        )
+//        Coordinator(text: $text,
+//                    onCommit: self.onCommit,
+//                    onCancel: self.onCancel,
+//                    onBeginEditing: self.onBeginEditing
+//        )
+        Coordinator(self)
     }
     
     class Coordinator: NSObject, UISearchBarDelegate {
@@ -55,21 +58,36 @@ struct SearchBar: UIViewRepresentable {
         private var onCancel: () -> Void = {}
         private var onBeginEditing: () -> Void = {}
 //        private var onTextChanged: (String?) -> Void = { _ in }
+        
+        
+        var parent: SearchBar
+        
 
-        init(text: Binding<String>,
-             onCommit: @escaping (String) -> Void = { _ in },
-             onCancel: @escaping () -> Void = {},
-             onBeginEditing: @escaping () -> Void = {}) {
-            _text = text
-            self.onCommit = onCommit
-            self.onCancel = onCancel
-            self.onBeginEditing = onBeginEditing
-//            self.onTextChanged = onTextChanged
+//        init(text: Binding<String>,
+//             onCommit: @escaping (String) -> Void = { _ in },
+//             onCancel: @escaping () -> Void = {},
+//             onBeginEditing: @escaping () -> Void = {}) {
+//            _text = text
+//            self.onCommit = onCommit
+//            self.onCancel = onCancel
+//            self.onBeginEditing = onBeginEditing
+////            self.onTextChanged = onTextChanged
+//        }
+        
+        init(_ parent: SearchBar) {
+            self.parent = parent
+            _text = parent.$text
+            
+            super.init()
+            self.onCommit = parent.onCommit
+            self.onCancel = parent.onCancel
+            self.onBeginEditing = parent.onBeginEditing
         }
         
         func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
             searchBar.resignFirstResponder()
             searchBar.showsCancelButton = false
+            self.parent.showsCancelButton = false
             searchBar.endEditing(true)
 
             if let text = searchBar.text {
@@ -97,12 +115,14 @@ struct SearchBar: UIViewRepresentable {
             text = ""
             searchBar.resignFirstResponder()
             searchBar.showsCancelButton = false
+            self.parent.showsCancelButton = false
             searchBar.endEditing(true)
             self.onCancel()
         }
         
         func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
             searchBar.showsCancelButton = true
+            self.parent.showsCancelButton = true
             self.onBeginEditing()
         }
         
